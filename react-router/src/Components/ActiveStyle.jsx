@@ -4,6 +4,13 @@ export const ActiveStyle = {
 	color: "blue",
 };
 
+export const ActiveAnim = {
+	transform: "scale(1.2)",
+	transition: "transform 0.3s ease",
+	width: "50px",
+	height: "50",
+};
+
 // import React from "react"
 // import { Link, Outlet ,NavLink} from "react-router-dom"
 

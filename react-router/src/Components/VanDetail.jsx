@@ -1,30 +1,32 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import vansData from "./server";
+import { Link, useLocation, useLoaderData } from "react-router-dom";
+import { getVans } from "../api";
+
+export function loader({ params }) {
+	return getVans(params.id);
+}
 
 export default function VanDetail() {
-	const params = useParams();
-	const [selectedVan, setSelectedVan] = useState(null);
+	const location = useLocation();
+	const van = useLoaderData();
 
-	useEffect(() => {
-		const vanId = params.id;
-		const foundVan = vansData.find((van) => van.id === vanId);
-		setSelectedVan(foundVan);
-	}, [params.id]);
+	const search = location.state?.search || "";
+	const type = location.state?.type || "all";
 
 	return (
 		<div className="van-detail-container">
-			{selectedVan ? (
+			<Link to={`..${search}`} relative="path" className="back-button">
+				&larr; <span>Back to {type} vans</span>
+			</Link>
+
+			{van ? (
 				<div className="van-detail">
-					<img src={selectedVan.imageUrl} alt={selectedVan.name} />
-					<i className={`van-type ${selectedVan.type} selected`}>
-						{selectedVan.type}
-					</i>
-					<h2>{selectedVan.name}</h2>
+					<img src={van.imageUrl} />
+					<i className={`van-type ${van.type} selected`}>{van.type}</i>
+					<h2>{van.name}</h2>
 					<p className="van-price">
-						<span>${selectedVan.price}</span>/day
+						<span>${van.price}</span>/day
 					</p>
-					<p>{selectedVan.description}</p>
+					<p>{van.description}</p>
 					<button className="link-button">Rent this van</button>
 				</div>
 			) : (

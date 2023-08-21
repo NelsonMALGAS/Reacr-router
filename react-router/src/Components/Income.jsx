@@ -1,5 +1,10 @@
 const Income = () => {
-	return <h1>Income goes here</h1>;
+	return (
+		<div>
+			<h1>Income</h1>
+			<p>Your income details and summary go here.</p>
+		</div>
+	);
 };
 
 export default Income;

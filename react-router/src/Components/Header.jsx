@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
-import { ActiveStyle } from "./ActiveStyle";
+import { ActiveStyle, ActiveAnim } from "./ActiveStyle";
+import icon from "../assets/person-circle-outline.svg";
 
 const Header = () => {
 	return (
@@ -8,9 +9,25 @@ const Header = () => {
 				#VanLife
 			</Link>
 			<nav>
-				<Link to="/host">Host</Link>
-				<Link to="/About">About</Link>
-				<Link to="/vans">Vans</Link>
+				<NavLink
+					to="/host"
+					end
+					style={({ isActive }) => (isActive ? ActiveStyle : null)}
+				>
+					Host
+				</NavLink>
+				<NavLink
+					to="/About"
+					style={({ isActive }) => (isActive ? ActiveStyle : null)}
+				>
+					About
+				</NavLink>
+				<NavLink
+					to="/vans"
+					style={({ isActive }) => (isActive ? ActiveStyle : null)}
+				>
+					Vans
+				</NavLink>
 				<NavLink
 					to="/contacts"
 					//className={({ isActive }) => (isActive ? "my-link" : null)}
@@ -19,6 +36,12 @@ const Header = () => {
 				>
 					Contacts
 				</NavLink>
+				<Link
+					to="/login"
+					className={(obj) => (obj.isActive ? ActiveAnim : null)}
+				>
+					<img src={icon} className="login-icon" />
+				</Link>
 			</nav>
 		</header>
 	);
